@@ -20,6 +20,48 @@ class Worker(threading.Thread):
       print ("Exiting", self.name, "Processed", self.symbol)
       self.isRunning = False
 
+class Worker2(threading.Thread):
+   def __init__(self, threadID, name):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.isRunning = False
+      self.symbol = None
+   def run(self):
+      self.isRunning = True
+      print ("Starting",  self.name, "Processing", self.symbol)
+      getSMA(self.symbol)
+      print ("Exiting", self.name, "Processed", self.symbol)
+      self.isRunning = False
+
+class Worker3(threading.Thread):
+   def __init__(self, threadID, name):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.isRunning = False
+      self.symbol = None
+   def run(self):
+      self.isRunning = True
+      print ("Starting",  self.name, "Processing", self.symbol)
+      getMACD(self.symbol)
+      print ("Exiting", self.name, "Processed", self.symbol)
+      self.isRunning = False
+
+class Worker4(threading.Thread):
+   def __init__(self, threadID, name):
+      threading.Thread.__init__(self)
+      self.threadID = threadID
+      self.name = name
+      self.isRunning = False
+      self.symbol = None
+   def run(self):
+      self.isRunning = True
+      print ("Starting",  self.name, "Processing", self.symbol)
+      getsto(self.symbol)
+      print ("Exiting", self.name, "Processed", self.symbol)
+      self.isRunning = False
+
 
 # Sort and remove whitespace in NASDAQ file
 file = open("/Users/mlam/Box Sync/fall2017/CSCI 250/StockScreener/mysite/stockScreener/input/NASDAQ.txt", "r")
@@ -37,14 +79,16 @@ finalList = Queue.Queue()
 def getVol(sym):
     global finalList
     ts=TimeSeries(key='GSD3E3P11LSBZG5O', output_format='pandas')
-    
+
     try:
         data, meta_data = ts.get_intraday(symbol = sym)
     except Exception:
         return
 
-    if ((data["volume"].iloc[-1]) > 250000).all():   
-        finalList.put(sym)
+    if (len(data) != 0):
+        if ((data["volume"].iloc[-1]) > 250000).all():
+            finalList.put(sym)
+
 
 def getVolAll():
     global finalList
@@ -75,25 +119,51 @@ def getVolAll():
         print item
 
 # If SMA is > quote
-def getSMA():
+def getSMA(sym):
+    global finalList
+
+    ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
+    ts=TimeSeries(key='GSD3E3P11LSBZG5O', output_format='pandas')
+    try:
+        data, meta_data = ti.get_sma(sym)
+        data2, meta_data2 = ts.get_daily(symbol=sym)
+    except Exception:
+        return
+
+    if (len(data) != 0):
+        if ((data["SMA"].iloc[-1]) < data2["close"].iloc[-1]).all():
+            print ("failed SMA", sym)
+            finalList.get(sym)
+        else:
+            print("passed SMA", sym)
+    else:
+        finalList.get(sym)
+        print("No SMA data available. Removing from list!", sym)
+
+def getSMAAll():
     global finalList
 
     volList = list(finalList.queue)
 
-    for sym in volList:
-        ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
-        ts=TimeSeries(key='GSD3E3P11LSBZG5O', output_format='pandas')
-        try:
-            data, meta_data = ti.get_sma(sym)
-            data2, meta_data2 = ts.get_daily(symbol=sym)
-        except Exception:
-            return
+    nThreads = finalList.qsize()
+    threadPool = [None] * nThreads
+    for i in range(nThreads):
+        threadPool[i] = Worker(i, i)
+    threadIndex = 0
 
-        if ((data["SMA"].iloc[-1]) < data2["close"].iloc[-1]).all():
-            print ("failed SMA", sym)
-            finalList.get(sym)
-        else: 
-            print("passed SMA", sym)
+    for symbol in volList:
+        if threadPool[threadIndex].isRunning:
+            threadPool[threadIndex].join()
+
+        threadPool[threadIndex] = Worker(threadIndex, threadIndex)
+        threadPool[threadIndex].symbol = symbol
+        threadPool[threadIndex].start()
+        threadIndex += 1
+        if threadIndex == nThreads:
+            threadIndex = 0
+
+    for thrd in threadPool:
+        thrd.join()
 
     tempList = list(finalList.queue)
     print ("SMA List:")
@@ -101,25 +171,50 @@ def getSMA():
         print item
 
 # If MACD is > 0
-def getMACD():
+def getMACD(sym):
     global finalList
-    
-    smaList = list(finalList.queue)
 
-    for sym in smaList:
-        ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
-        try:
-            data, meta_data = ti.get_macd(symbol=sym, interval='monthly')
-        except Exception:
-            return
+    ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
+    try:
+        data, meta_data = ti.get_macd(symbol=sym, interval='monthly')
+    except Exception:
+        return
 
-        if len(data) == 0:
-            continue
+    if (len(data) != 0):
         if ((data["MACD_Hist"].iloc[-1]) < 0).all():
             print("failed MACD", sym, (data["MACD_Hist"].iloc[-1]))
-            finalList.get(sym)    
-        else: 
+            finalList.get(sym)
+        else:
             print("passed MACD", sym)
+    else:
+        finalList.get(sym)
+        print("No MACD data available. Removing from list!", sym)
+
+
+def getMACDAll():
+    global finalList
+
+    smaList = list(finalList.queue)
+
+    nThreads = finalList.qsize()
+    threadPool = [None] * nThreads
+    for i in range(nThreads):
+        threadPool[i] = Worker(i, i)
+    threadIndex = 0
+
+    for symbol in smaList:
+        if threadPool[threadIndex].isRunning:
+            threadPool[threadIndex].join()
+
+        threadPool[threadIndex] = Worker(threadIndex, threadIndex)
+        threadPool[threadIndex].symbol = symbol
+        threadPool[threadIndex].start()
+        threadIndex += 1
+        if threadIndex == nThreads:
+            threadIndex = 0
+
+    for thrd in threadPool:
+        thrd.join()
 
     tempList = list(finalList.queue)
     print ("MACD List:")
@@ -131,34 +226,57 @@ def getMACD():
 def getSto():
     global finalList
 
-    macdList = list(finalList.queue)
-  
-    for sym in macdList:
-        ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
-        try:
-             data, meta_data = ti.get_stoch(symbol=sym, interval='monthly')
-        except Exception:
-            return
+    ti = TechIndicators(key='GSD3E3P11LSBZG5O', output_format='pandas')
+    try:
+        data, meta_data = ti.get_stoch(symbol=sym, interval='monthly')
+    except Exception:
+        return
 
-        if len(data) == 0:
-            continue
+    if (len(data) != 0):
         if ((data["SlowK"].iloc[-1]) < 75).all():
             print("failed Sto", sym, (data["SlowK"].iloc[-1]))
             finalList.get(sym)
-        else: 
-            print("passed Sto", sym)
+        else:
+             print("passed Sto", sym)
+    else:
+        finalList.get(sym)
+        print("No Sto data available. Removing from list!", sym)
 
-    finalList = list(finalList.queue)
+def getStoAll():
+    global finalList
+
+    macdList = list(finalList.queue)
+
+    nThreads = finalList.qsize()
+    threadPool = [None] * nThreads
+    for i in range(nThreads):
+        threadPool[i] = Worker(i, i)
+    threadIndex = 0
+
+    for symbol in macdList:
+        if threadPool[threadIndex].isRunning:
+            threadPool[threadIndex].join()
+
+        threadPool[threadIndex] = Worker(threadIndex, threadIndex)
+        threadPool[threadIndex].symbol = symbol
+        threadPool[threadIndex].start()
+        threadIndex += 1
+        if threadIndex == nThreads:
+            threadIndex = 0
+
+    for thrd in threadPool:
+        thrd.join()
+
+    tempList = list(finalList.queue)
     print ("Final List:")
-    for item in finalList:
+    for item in tempList:
         print item
-
 
 def main():
     getVolAll()
-    getSMA()
-    getMACD()
-    getSto()
+    getSMAAll()
+    getMACDAll()
+    getStoAll()
     return finalList
 
 if __name__ == "__main__":

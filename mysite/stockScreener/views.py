@@ -17,8 +17,4 @@ class WatchlistPageView(TemplateView):
 
 class GeneratePageView(TemplateView):
     template_name = "generate.html"
- 
-def list(request):
-    returnList = stockScreener.main()
-    printList = "<html><body>Results List:: %s.</body></html>" % returnList
-    return HttpResponse(printList)
+
