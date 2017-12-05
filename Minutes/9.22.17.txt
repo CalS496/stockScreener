@@ -1,0 +1,60 @@
+9/22/17
+
+Learning about Stocks
+	*Shares vs regular stocks (the differences in their
+	commodities)
+
+*Only going into basics, way for firms to get money to invest 
+in capital
+
+No shorting stocks - sell stocks at higher because you expected
+lower
+
+**Look more on stocks that we think are profitable for now
+
+///////////////////////////////
+Three different graphs: How they perform and function
+
+For everything, use SMP500 as a basis
+
+SMP500: Index that tracks the 500 biggest companies (in the USA)
+and NASDQ
+
+Use 2 different 
+Slow Moving Average: Compares with the SMP500, curve should
+be over to indicate that SMP500 is doing well
+
+The Volume : Over 250,000, the greater the volume, the more stable
+(More investors, not as easily swayed)
+
+(MACD) Moving Average Convergence Divergence : Showing
+the short term momentum of the stocks
+Just average of the day
+
+Stochastic Fast: Shows increments in time (slow or fast choice)
+shows if stock is oversold / overbought
+	Oversold: Lots of people sell
+	Overbought: Lots of people buy
+
+**GENERALLY WHAT DRIVES THE MARKET IS CONSUMER EXPECTATIONS
+
+SINK OR SWIM PLATFORM
+
+Market opens at 9:30-4:00
+
+RobinHood > app for trading, no transaction fees
+
+Screening Process:
+Use architect platform
+
+Software for the Long-Term
+
+Homework:
+*Look up Stochastic Fast, also look up differences between this and 
+Slow
+
+**Check out the API (for Stochastic), Michelle will send it / Study Python
+
+***Look up anything else for the next meeting
+
+****Design a wireframe for website (general design idea)

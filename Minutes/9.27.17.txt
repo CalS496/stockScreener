@@ -1,0 +1,102 @@
+9/27/17
+
+Reviewing Individual Research 10-15
+Michelle:
+	SMA - Simple Moving Average: Trends and averages
+		To calculate: Take average of closing prices, 
+		for however, 30 day for us, compare it against SMP500
+
+		All points are equal in a SMA
+
+		*Lines are stock prices,
+		"A good indicator is when it is on an upward trend
+		and is above average"
+
+	Volume - Looking at average volume (for us) for 30 days
+		MIN: $250,000
+		Trade: Buy and Sell at the same price
+		Number of shares traded for a given period
+		
+		*Basically gives concrete measure of investor interest
+		and trends in demands
+
+	Sectors - From top down, largest one is sector (group 
+		of companies),
+		Next is industry
+		Finally is stock
+		Few that we will look at! Always google later
+
+Calvin: 
+Stochastic Fast
+	Is there a limited amount of stocks being traded?
+	 -Comparing to the volume being traded before,
+		Not really a fixed number?
+
+Teo: 
+MACD - Moving Average Convergence Divergence
+	Short term momentum, positive and negative
+	Positive: from barish to bullish
+	Negative: from bullish to barish
+
+	barish: falling share prices
+	bullish: rising share prices
+
+
+*Like looking at stocks with a bar chart
+	Suggestion: it is easier, left is close, right is open
+
+////////////////////////////
+API
+	Observations
+	Consistent arguments / kwarguments
+
+Wireframes
+	Challenge: Do we have to draw the graphs or can we
+	import them
+
+	Maybe in the API?
+
+	How can we get all the variables?
+		From NYSCE or NASDAQ
+		Whichever one, do research first
+
+	Watchlist page: stores all the generated graphs here
+		symbol
+		last price
+		net change
+		last updated
+
+	**Keep interactivity for later (AVOID SCOPE CREEP)
+
+	***Keep HTML&CSS 
+
+	Possibly create an equation that can help with determining 
+	importance. > Gives a priority watch list
+
+	Able to create in ascending order importance of generated
+	graphs
+
+	How can we have persistent memory? Store once, or just send us
+	once.
+	
+	Also show netchange for the day? Flags for sudden changes? (Hard
+	to do cause market is volatile - saved for later)
+
+**Assume barebones!!!!
+-No interactivity
+-No multiple users
+
+////////////////////////////	
+HW:
+	Look into kwargs vs args (10 sec search!)
+	Self-Review: Python, Json
+
+Next Meeting: 
+	Plan A: Sun Oct 1 (save 2 or more hours)
+	11-1
+	Sit down and figure out the code/API actually running
+	Print results
+	WONT LEAVE UNTIL WE GET SOMETHING
+
+
+>>API KEY: GSD3E3P11LSBZG50

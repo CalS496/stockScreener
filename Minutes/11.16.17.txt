@@ -1,0 +1,23 @@
+API can't tell where it belongs to in sector 
+	API problem? No solution?
+
+Need optimization. Meets safe case-returns a list despite being slow
+
+* Learn django					[-]
+* Get generate bar working			[goal]
+* Implement a loading bar			[fun]
+* Put disclaimer on website 			[x]
+* Look at licenses 				[x]
+* Create a game on MarketWatch?			[x]
+* In the end, remove minutes 
+* Design comes afterwards -> AMCharts?
+* Program code to run 3 times during market at different times, 9, 2, 3:30
+	Save output, and compare over a week
+	Problem: Would now have to implement a database and an account
+	Possible cause it is for one user
+
+	Cool thing about Github, can host websites on Github, but still have to implement 
+	database
+
+
+Progress: A lot done. Just need Michelle's decision on some
