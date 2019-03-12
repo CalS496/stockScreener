@@ -1,5 +1,5 @@
 # stockScreener
-Stock screener web application that autogenerates a list based on SMA, Vol, MACD, StoF, and Sector.
+stockScreener is a web application that autogenerates a list with SMA, Vol, MACD, StoF, and Sector filters.
 
 ## Getting Started
 
@@ -37,7 +37,7 @@ Explain how to run the automated tests for this system
 
 ### Break down into end to end tests
 
-Explain what these tests test and why
+<Explain what these tests test and why>
 
 ```
 Give an example
@@ -45,7 +45,7 @@ Give an example
 
 ### And coding style tests
 
-Explain what these tests test and why
+<Explain what these tests test and why>
 
 ```
 Give an example
@@ -53,17 +53,18 @@ Give an example
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+<Add additional notes about how to deploy this on a live system>
 
 ## Built With
 
-* 
+* Python v.2.7.10
+* Django v.1.1
 
 ## Authors
 
-* **Michelle Lam** - [MLam6](https://github.com/mlam6)
+* **Michelle L** - [MLam6](https://github.com/mlam6)
 * **Teodor Nicola** - [TeodorNicola](https://github.com/TeodorNicola)
-* **Calvin Hung** - [CalS496](https://github.com/CalS496)
+* **Calvin H** - [CalS496](https://github.com/CalS496)
 
 ## License
 
