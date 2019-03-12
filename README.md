@@ -7,40 +7,40 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install the software and how to install them.
 
 ```
-Give examples
+<Give examples>
 ```
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+How to get a development environment running.
 
-Say what the step will be
+<Say what the step will be>
 
 ```
-Give the example
+<Give the example>
 ```
 
 And repeat
 
 ```
-until finished
+<until finished>
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+<End with an example of getting some data out of the system or using it for a little demo>
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+<Explain how to run the automated tests for this system>
 
 ### Break down into end to end tests
 
 <Explain what these tests test and why>
 
 ```
-Give an example
+<Give an example>
 ```
 
 ### And coding style tests
@@ -48,7 +48,7 @@ Give an example
 <Explain what these tests test and why>
 
 ```
-Give an example
+<Give an example>
 ```
 
 ## Deployment
@@ -69,10 +69,14 @@ Give an example
 ## License
 
 This project is licensed under 
+
 ## Limitations
 
 * 
 
 ## Acknowledgments
 
-* 
+* We would like to give acknowledgements to our clients for the idea inspiration. We are happy to provide an application that can hopefully solve a lot of problems.
+* We would also like to give acknowledgements to our Professor for giving us the environment to work and develop this application.
+* We would also like to give acknowledgements to Python and Django, for which our application relies heavily on.
+* We would also like to give acknowledgements to all the collaborators involved in the development of this project. Though we had our fair share of difficulties, we all managed to pull through and deliver a worthy project version.
